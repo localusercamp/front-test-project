@@ -1,0 +1,320 @@
+{
+  "trainings": [
+    {
+        "id": 1,
+        "start_time": "09:00",
+        "finish_time": "12:00",
+        "date": "01.07.2022",
+        "groupId": 1,
+        "completed": true,
+        "typeId": 1
+    }, {
+        "id": 2,
+        "start_time": "16:00",
+        "finish_time": "18:00",
+        "date": "01.08.2022",
+        "groupId": 2,
+        "completed": false,
+        "typeId": 1
+    }, {
+        "id": 3,
+        "start_time": "08:00",
+        "finish_time": "10:00",
+        "date": "03.08.2022",
+        "groupId": 1,
+        "completed": false,
+        "typeId": 1
+    }, {
+        "id": 4,
+        "start_time": "17:00",
+        "finish_time": "19:30",
+        "date": "03.08.2022",
+        "groupId": 2,
+        "completed": false,
+        "typeId": 1
+    }, {
+        "id": 5,
+        "start_time": "17:00",
+        "finish_time": "19:30",
+        "date": "03.08.2022",
+        "groupId": 1,
+        "completed": false,
+        "typeId": 1
+    }, {
+        "id": 6,
+        "start_time": "11:00",
+        "finish_time": "13:00",
+        "date": "06.08.2022",
+        "groupId": 1,
+        "completed": false,
+        "typeId": 1
+    }, {
+        "id": 7,
+        "start_time": "14:00",
+        "finish_time": "15:30",
+        "date": "06.08.2022",
+        "groupId": 2,
+        "completed": false,
+        "typeId": 1
+    }, {
+        "id": 8,
+        "start_time": "08:30",
+        "finish_time": "10:30",
+        "date": "09.08.2022",
+        "groupId": 1,
+        "completed": false,
+        "typeId": 1
+    }, {
+        "id": 9,
+        "start_time": "13:00",
+        "finish_time": "15:30",
+        "date": "11.08.2022",
+        "groupId": 1,
+        "completed": false,
+        "typeId": 1
+    }
+  ],
+
+  "groups": [
+    {
+        "id": 1,
+        "title": "1-Ханты-1-0001",
+        "address": "ул. Ледовая 21"
+    }, {
+        "id": 2,
+        "title": "2-Ханты-2-0002",
+        "address": "ул. Энгельса 4"
+    }
+  ],
+
+  "profiles": [
+    {
+        "id": 1,
+        "first_name": "Евгений",
+        "last_name": "Скороход",
+        "patronymic": "Викторович",
+        "birth_date": "27.03.2007",
+        "phone": "89483345751",
+        "groupId": 1,
+        "clientId": 8
+    }, {
+        "id": 2,
+        "first_name": "Александра",
+        "last_name": "Бабаджаева",
+        "patronymic": "Олеговна",
+        "birth_date": "15.05.2007",
+        "phone": "89652131376",
+        "groupId": 1,
+        "clientId": 5
+    }, {
+        "id": 3,
+        "first_name": "Нииса",
+        "last_name": "Колмыкова",
+        "patronymic": "Петровна",
+        "birth_date": "24.06.2010",
+        "phone": "89745270898",
+        "groupId": 1,
+        "clientId": 13
+    }, {
+        "id": 4,
+        "first_name": "Виктория",
+        "last_name": "Потемкина",
+        "patronymic": "Викторовна",
+        "birth_date": "23.06.2006",
+        "phone": "89542827218",
+        "groupId": 1,
+        "clientId": 4
+    }, {
+        "id": 5,
+        "first_name": "Анастасия",
+        "last_name": "Каскадерова",
+        "patronymic": "Владимировна",
+        "birth_date": "29.06.2001",
+        "phone": "89203166732",
+        "groupId": 1,
+        "clientId": 11
+    }, {
+        "id": 6,
+        "first_name": "Мухтар",
+        "last_name": "Собаков",
+        "patronymic": "Гаисович",
+        "birth_date": "21.08.2000",
+        "phone": "89326445461",
+        "groupId": 1,
+        "clientId": 2
+    }, {
+        "id": 7,
+        "first_name": "Наир",
+        "last_name": "Батруков",
+        "patronymic": "Альбертович",
+        "birth_date": "17.03.2000",
+        "phone": "89633247403",
+        "groupId": 1,
+        "clientId": 3
+    }, {
+        "id": 8,
+        "first_name": "Владимир",
+        "last_name": "Карманов",
+        "patronymic": "Владимирович",
+        "birth_date": "13.09.2004",
+        "phone": "89989481615",
+        "groupId": 1,
+        "clientId": 14
+    }, {
+        "id": 9,
+        "first_name": "Александр",
+        "last_name": "Руморов",
+        "patronymic": "Олеговна",
+        "birth_date": "27.06.2009",
+        "phone": "89879331203",
+        "groupId": 2,
+        "clientId": 9
+    }, {
+        "id": 10,
+        "first_name": "Надежда",
+        "last_name": "Руморовна",
+        "patronymic": "Петровна",
+        "birth_date": "13.08.2003",
+        "phone": "89669086472",
+        "groupId": 2,
+        "clientId": 1
+    }, {
+        "id": 11,
+        "first_name": "Раиса",
+        "last_name": "Саватеева",
+        "patronymic": "Викторовна",
+        "birth_date": "14.05.2009",
+        "phone": "89558021460",
+        "groupId": 2,
+        "clientId": 7
+    }, {
+        "id": 12,
+        "first_name": "Анастасия",
+        "last_name": "Каскадерова",
+        "patronymic": "Владимировна",
+        "birth_date": "19.08.2006",
+        "phone": "89429698362",
+        "groupId": 2,
+        "clientId": 12
+    }, {
+        "id": 13,
+        "first_name": "Александр",
+        "last_name": "Собаков",
+        "patronymic": "Викторович",
+        "birth_date": "20.03.2001",
+        "phone": "89914205815",
+        "groupId": 2,
+        "clientId": 4
+    }, {
+        "id": 14,
+        "first_name": "Полип",
+        "last_name": "Батруков",
+        "patronymic": "Викторович",
+        "birth_date": "28.08.2000",
+        "phone": "89208228574",
+        "groupId": 2,
+        "clientId": 2
+    }, {
+        "id": 15,
+        "first_name": "Александр",
+        "last_name": "Саватеев",
+        "patronymic": "Викторович",
+        "birth_date": "25.06.2007",
+        "phone": "89107835693",
+        "groupId": 2,
+        "clientId": 3
+    }, {
+        "id": 16,
+        "first_name": "Максим",
+        "last_name": "Проскурин",
+        "patronymic": "Олегович",
+        "birth_date": "28.03.2008",
+        "phone": "89542863292",
+        "groupId": 2,
+        "clientId": 6
+    }, {
+        "id": 17,
+        "first_name": "Варвара",
+        "last_name": "Симохина",
+        "patronymic": "Викторовна",
+        "birth_date": "15.05.2003",
+        "phone": "89360160977",
+        "groupId": 2,
+        "clientId": 10
+    }, {
+        "id": 18,
+        "first_name": "Максим",
+        "last_name": "Подарочкин",
+        "patronymic": "Максимович",
+        "birth_date": "17.08.2010",
+        "phone": "89885228612",
+        "groupId": 2,
+        "clientId": 8
+    }
+  ],
+
+  "equipments": [
+    {
+        "id": 1,
+        "title": "Лыжный комплект 1"
+    }, {
+        "id": 2,
+        "title": "Лыжный комплект 2"
+    }
+  ],
+
+  "attendings": [
+    { "id": 1, "trainingId": 1, "profileId": 1, "equipmentId": 2 },
+    { "id": 2, "trainingId": 1, "profileId": 2, "equipmentId": null },
+    { "id": 3, "trainingId": 1, "profileId": 3, "equipmentId": null },
+    { "id": 4, "trainingId": 1, "profileId": 5, "equipmentId": null },
+    { "id": 5, "trainingId": 1, "profileId": 7, "equipmentId": 1 },
+    { "id": 6, "trainingId": 1, "profileId": 8, "equipmentId": null }
+  ],
+
+  "subscriptions": [
+    { "id": 1,  "max_visits": 12, "visited": 8, "expires_at": "09.08.2022", "created_at": "09.07.2022", "profileId": 1 },
+    { "id": 2,  "max_visits": 12, "visited": 8, "expires_at": "03.08.2022", "created_at": "03.07.2022", "profileId": 2 },
+    { "id": 3,  "max_visits": 10, "visited": 10, "expires_at": "09.08.2022", "created_at": "09.07.2022", "profileId": 3 },
+    { "id": 4,  "max_visits": 10, "visited": 7, "expires_at": "01.08.2022", "created_at": "01.07.2022", "profileId": 4 },
+    { "id": 5,  "max_visits": 10, "visited": 2, "expires_at": "02.08.2022", "created_at": "02.07.2022", "profileId": 5 },
+    { "id": 6,  "max_visits": 10, "visited": 3, "expires_at": "03.08.2022", "created_at": "03.07.2022", "profileId": 6 },
+    { "id": 7,  "max_visits": 8, "visited": 8, "expires_at": "09.08.2022", "created_at": "09.07.2022", "profileId": 17 },
+    { "id": 8,  "max_visits": 8, "visited": 3, "expires_at": "27.08.2022", "created_at": "27.07.2022", "profileId": 8 },
+    { "id": 9,  "max_visits": 8, "visited": 4, "expires_at": "09.08.2022", "created_at": "09.07.2022", "profileId": 9 },
+    { "id": 10, "max_visits": 8, "visited": 4, "expires_at": "03.08.2022", "created_at": "03.07.2022", "profileId": 18 },
+    { "id": 11, "max_visits": 12, "visited": 8, "expires_at": "17.08.2022", "created_at": "17.07.2022", "profileId": 11 },
+    { "id": 12, "max_visits": 12, "visited": 8, "expires_at": "17.08.2022", "created_at": "17.07.2022", "profileId": 12 },
+    { "id": 13, "max_visits": 2, "visited": 0, "expires_at": "03.08.2022", "created_at": "03.07.2022", "profileId": 13 },
+    { "id": 14, "max_visits": 2, "visited": 0, "expires_at": "03.08.2022", "created_at": "03.07.2022", "profileId": 14 },
+    { "id": 15, "max_visits": 12, "visited": 7, "expires_at": "02.08.2022", "created_at": "02.07.2022", "profileId": 15 },
+    { "id": 16, "max_visits": 12, "visited": 9, "expires_at": "27.08.2022", "created_at": "27.07.2022", "profileId": 16 }
+  ],
+
+  "types": [
+    {
+        "id": 1,
+        "title": "Зачёт"
+    }, {
+        "id": 2,
+        "title": "Простая"
+    }
+  ],
+
+  "clients": [
+    { "id": 1, "fio": "Куйбешыва Мария Степановна", "phone": "89395505736" },
+    { "id": 2, "fio": "Проскурина Эльвира Степановна", "phone": "89899409714" },
+    { "id": 3, "fio": "Филипенко Мария Ивановна", "phone": "89652335043" },
+    { "id": 4, "fio": "Путина Александра Денисовна", "phone": "89876659055" },
+    { "id": 5, "fio": "Строцких Василий Дмитриевич", "phone": "89822398708" },
+    { "id": 6, "fio": "Русых Василий Иванович", "phone": "89731526347" },
+    { "id": 7, "fio": "Песков Василий Погорельцев", "phone": "89488781038" },
+    { "id": 8, "fio": "Кац Александр Иванович", "phone": "89862615723" },
+    { "id": 9, "fio": "Иванова Александра Степановна", "phone": "89592019154" },
+    { "id": 10, "fio": "Плотных Мария Васильевна", "phone": "89339572543" },
+    { "id": 11, "fio": "Иванов Александр Дмитриевич", "phone": "89581402473" },
+    { "id": 12, "fio": "Астафьева Александра Степановна", "phone": "89601357200" },
+    { "id": 13, "fio": "Морякова Мария Васильевна", "phone": "89933466125" },
+    { "id": 14, "fio": "Дмитров Александр Дмитриевич", "phone": "89523965807" }
+  ]
+}

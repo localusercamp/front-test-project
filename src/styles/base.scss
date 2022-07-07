@@ -1,0 +1,51 @@
+@import 'reset';
+@import 'colors';
+
+$cera-pro-font-path: '../public/fonts/CeraPro';
+
+@font-face {
+    font-family: 'Cera Pro';
+    src: url($cera-pro-font-path + '/CeraPro-Regular.woff') format('woff'),
+}
+
+%cera-pro-medium {
+    font-weight: 500;
+}
+
+%cera-pro-bold {
+    font-weight: bold;
+}
+
+html {
+    font-family: 'Cera Pro';
+    font-style: normal;
+}
+
+h3 {
+    @extend %cera-pro-medium;
+}
+
+h4 {
+    @extend %cera-pro-bold;
+}
+
+.header {
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+}
+
+.day-header {
+    color: $blue-base;
+    padding: 10px;
+}
+
+.list-item {
+    display: flex;
+    padding: 20px 12px;
+    border: 1px solid $lightgray-border;
+}
+
+.list-item-left {
+    margin-right: 20px;
+}
