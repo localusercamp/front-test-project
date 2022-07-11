@@ -20,16 +20,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-  data() {
-    return {
-      currentDate: new Date()
-    }
-  },
-  computed: {
-    currentDateToString() {
-      return this.currentDate.toLocaleDateString();
-    }
   }
 }
 </script>

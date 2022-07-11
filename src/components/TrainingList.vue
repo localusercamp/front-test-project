@@ -1,6 +1,11 @@
 <template>
   <div class="training-list">
-    <TrainingListItem v-for="(training, index) in trainings" :key="index" :training="training" :group="groups.find(group => training.groupId === group.id)" />
+    <TrainingListItem
+      v-for="(training, index) in trainings"
+      :key="index"
+      :training="training"
+      :group="groups.find(group => training.groupId === group.id)"
+    />
   </div>
 </template>
 

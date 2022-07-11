@@ -4,12 +4,13 @@
       <img id="calendar-icon" src="@/assets/icons/Calendar.svg">
       <h4 class="header-text">Расписание</h4>
     </div>
-    <div v-for="(item, index) in shedule" :key="index" class="trainings">
-      <h4 v-if="item.date === currentDate.toLocaleDateString()" class="day-header">Сегодня</h4>
-      <h4 v-else-if="item.date === tomorrow.toLocaleDateString()" class="day-header">Завтра</h4>
-      <h4 v-else class="day-header">{{getDayAndMonth(convertStringToDate(item.date))}}</h4>
+    <div v-for="(item, index) in shedule_visible" :key="index" class="trainings">
+      <h4 v-if="item.date !== currentDate.toLocaleDateString()" class="day-header">{{getDayAndMonth(convertStringToDate(item.date))}}</h4>
+      <h4 v-else-if="item.date !== tomorrow.toLocaleDateString()" class="day-header">Сегодня</h4>
+      <h4 v-else class="day-header">Завтра</h4>
       <TrainingList :trainings="item.trainings" :groups="groups" />
     </div>
+    <div ref="observer"></div>
   </div>
 </template>
 
@@ -26,7 +27,9 @@ export default {
   },
   data() {
     return {
-      shedule: [],
+      schedule_all: [],
+      shedule_visible: [],
+      schedule_item_index: 0,
       groups: []
     }
   },
@@ -37,16 +40,23 @@ export default {
       unique_dates.forEach(date => {
         subarray = new_trainings.filter(new_training => new_training.date === date);
         subarray.forEach(training => delete training.date);
-        this.shedule.push({
+        this.schedule_all.push({
           date: date,
           trainings: subarray
         });
       });
     },
+    loadMoreTrainings() {
+      if(this.schedule_item_index < this.schedule_all.length - 1) {
+        this.shedule_visible = this.shedule_visible.concat(this.schedule_all.slice(this.schedule_item_index, this.schedule_item_index + 4));
+        this.schedule_item_index += 4;
+      }
+    },
     async fetchTrainings() {
       try {
         const response = await axios.get('http://localhost:8000/trainings');
         this.separateTrainings(response.data);
+        this.loadMoreTrainings();
       } catch (error) {
         alert("Ошибка! " + error);
       }
@@ -63,6 +73,17 @@ export default {
   mounted() {
     this.fetchTrainings();
     this.fetchGroups();
+    const options = {
+      rootMargin: '0px',
+      threshold: 1.0
+    }
+    const callback = (entries) => {
+      if(entries[0].isIntersecting) {
+        this.loadMoreTrainings();
+      }
+    };
+    const observer = new IntersectionObserver(callback, options);
+    observer.observe(this.$refs.observer)
   }
 }
 </script>
@@ -72,11 +93,11 @@ export default {
     text-align: center;
   }
 
-  .trainings {
-    margin-bottom: 25px;
+  #calendar-icon {
+    position: absolute;
   }
 
-  .header-text {
-    width: -webkit-fill-available;
+  .trainings {
+    margin-bottom: 25px;
   }
 </style>
