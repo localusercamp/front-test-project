@@ -1,14 +1,16 @@
 <template>
   <div>
-    <div class="header">
+    <div class="header" :class="{ header_scroll: isScroll }">
       <img id="calendar-icon" src="@/assets/icons/Calendar.svg">
       <h4 class="header-text">Расписание</h4>
     </div>
-    <div v-for="(item, index) in shedule_visible" :key="index" class="trainings">
-      <h4 v-if="item.date !== currentDate.toLocaleDateString()" class="day-header">{{getDayAndMonth(convertStringToDate(item.date))}}</h4>
-      <h4 v-else-if="item.date !== tomorrow.toLocaleDateString()" class="day-header">Сегодня</h4>
-      <h4 v-else class="day-header">Завтра</h4>
-      <TrainingList :trainings="item.trainings" :groups="groups" />
+    <div class="content">
+      <div v-for="(item, index) in shedule_visible" :key="index" class="trainings">
+        <h4 v-if="item.date !== currentDate.toLocaleDateString()" class="day-header">{{getDayAndMonth(convertStringToDate(item.date))}}</h4>
+        <h4 v-else-if="item.date !== tomorrow.toLocaleDateString()" class="day-header">Сегодня</h4>
+        <h4 v-else class="day-header">Завтра</h4>
+        <TrainingList :trainings="item.trainings" :groups="groups" />
+      </div>
     </div>
     <div ref="observer"></div>
   </div>
@@ -83,7 +85,7 @@ export default {
       }
     };
     const observer = new IntersectionObserver(callback, options);
-    observer.observe(this.$refs.observer)
+    observer.observe(this.$refs.observer);
   }
 }
 </script>

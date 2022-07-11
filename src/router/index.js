@@ -8,8 +8,9 @@ const routes = [
     component: ScheduleView
   },
   {
-    path: '/training_info',
+    path: '/training_info/:id',
     name: 'training_info',
+    props: true,
     component: () => import('@/views/TrainingInfoView.vue')
   }
 ]
