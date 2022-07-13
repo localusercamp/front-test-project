@@ -31,6 +31,8 @@ h4 {
 
 .header {
     position: fixed;
+    display: flex;
+    align-items: center;
     padding: 15px;
     width: 100%;
     background: white;
@@ -52,10 +54,19 @@ h4 {
 
 .list-item {
     display: flex;
-    padding: 20px 12px;
+    padding: 12px 20px;
     border: 1px solid $lightgray-border;
 }
 
 .list-item-left {
     margin-right: 20px;
 }
+
+.disabled {
+    color: $disabled-text;
+    background: $disabled-background;
+}
+
+.active-icon {
+    cursor: pointer;
+  }
