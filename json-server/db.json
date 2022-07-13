@@ -273,7 +273,7 @@
   ],
 
   "subscriptions": [
-    { "id": 1,  "max_visits": 12, "visited": 8, "expires_at": "09.08.2022", "created_at": "09.07.2022", "profileId": 1 },
+    { "id": 1,  "max_visits": 12, "visited": 11, "expires_at": "09.08.2022", "created_at": "09.07.2022", "profileId": 1 },
     { "id": 2,  "max_visits": 12, "visited": 8, "expires_at": "03.08.2022", "created_at": "03.07.2022", "profileId": 2 },
     { "id": 3,  "max_visits": 10, "visited": 10, "expires_at": "09.08.2022", "created_at": "09.07.2022", "profileId": 3 },
     { "id": 4,  "max_visits": 10, "visited": 7, "expires_at": "01.08.2022", "created_at": "01.07.2022", "profileId": 4 },

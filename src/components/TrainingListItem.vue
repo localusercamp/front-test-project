@@ -1,11 +1,14 @@
 <template>
-  <div class="list-item">
+  <router-link :to="{name: 'training_info', params: {id: training.id}}" class="list-item">
     <span id="training-time" class="list-item-left">{{training?.start_time}} - {{training?.finish_time}}</span>
     <div class="group-info">
-      <span id="group-title">{{group?.title}}</span>
+      <div>
+        <span id="group-title">{{group?.title}}</span>
+        <img id="check-mark" v-if="training.completed" src="@/assets/icons/Check_Mark.svg">
+      </div>
       <span id="group-address">{{group?.address}}</span>
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
@@ -32,6 +35,10 @@ export default {
 
   #group-address {
     font-size: 12px;
+  }
+
+  #check-mark {
+    margin-left: 10px;
   }
 
   .group-info {

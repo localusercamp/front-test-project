@@ -13,6 +13,9 @@ export default {
         },
         getDayAndMonth(date) {
             return `${date.getDate()} ${this.months[date.getMonth()]}`;
+        },
+        getFullDate(date) {
+            return `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}`;
         }
     },
     computed: {

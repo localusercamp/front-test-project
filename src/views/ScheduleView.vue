@@ -5,7 +5,7 @@
       <h4 class="header-text">Расписание</h4>
     </div>
     <div class="content">
-      <div v-for="(item, index) in shedule_visible" :key="index" class="trainings">
+      <div v-for="(item, index) in sсhedule_visible" :key="index" class="trainings">
         <h4 v-if="item.date !== currentDate.toLocaleDateString()" class="day-header">{{getDayAndMonth(convertStringToDate(item.date))}}</h4>
         <h4 v-else-if="item.date !== tomorrow.toLocaleDateString()" class="day-header">Сегодня</h4>
         <h4 v-else class="day-header">Завтра</h4>
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       schedule_all: [],
-      shedule_visible: [],
+      sсhedule_visible: [],
       schedule_item_index: 0,
       groups: []
     }
@@ -50,7 +50,7 @@ export default {
     },
     loadMoreTrainings() {
       if(this.schedule_item_index < this.schedule_all.length - 1) {
-        this.shedule_visible = this.shedule_visible.concat(this.schedule_all.slice(this.schedule_item_index, this.schedule_item_index + 4));
+        this.sсhedule_visible = this.sсhedule_visible.concat(this.schedule_all.slice(this.schedule_item_index, this.schedule_item_index + 4));
         this.schedule_item_index += 4;
       }
     },
@@ -97,6 +97,10 @@ export default {
 
   #calendar-icon {
     position: absolute;
+  }
+
+  .header-text {
+    width: 100%;
   }
 
   .trainings {
