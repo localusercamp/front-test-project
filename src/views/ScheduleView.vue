@@ -11,19 +11,19 @@
         <h4 v-else class="day-header">Завтра</h4>
         <TrainingList :trainings="item.trainings" :groups="groups" />
       </div>
+      <div class="observer" ref="observer"></div>
     </div>
-    <div ref="observer"></div>
   </div>
 </template>
 
 <script>
 import TrainingList from '@/components/TrainingList.vue';
+import observerMixin from '@/mixins/observerMixin';
 import dateMixin from '@/mixins/dateMixin';
-import axios from 'axios';
 
 export default {
   name: 'ScheduleView',
-  mixins: [dateMixin],
+  mixins: [dateMixin, observerMixin],
   components: {
     TrainingList
   },
@@ -56,7 +56,7 @@ export default {
     },
     async fetchTrainings() {
       try {
-        const response = await axios.get('http://localhost:8000/trainings');
+        const response = await this.$axios.get('trainings');
         this.separateTrainings(response.data);
         this.loadMoreTrainings();
       } catch (error) {
@@ -65,7 +65,7 @@ export default {
     },
     async fetchGroups() {
       try {
-        const response = await axios.get('http://localhost:8000/groups');
+        const response = await this.$axios.get('groups');
         this.groups = response.data;
       } catch (error) {
         alert("Ошибка! " + error);
@@ -75,17 +75,6 @@ export default {
   mounted() {
     this.fetchTrainings();
     this.fetchGroups();
-    const options = {
-      rootMargin: '0px',
-      threshold: 1.0
-    }
-    const callback = (entries) => {
-      if(entries[0].isIntersecting) {
-        this.loadMoreTrainings();
-      }
-    };
-    const observer = new IntersectionObserver(callback, options);
-    observer.observe(this.$refs.observer);
   }
 }
 </script>

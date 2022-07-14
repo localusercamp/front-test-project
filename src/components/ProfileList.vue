@@ -4,6 +4,7 @@
       v-for="(profile, index) in profiles"
       :key="index"
       :profile="profile"
+      :subscription="subscriptions.find(subscription => subscription.profileId === profile.id)"
     />
   </div>
 </template>
@@ -17,6 +18,10 @@ export default {
   },
   props: {
     profiles: {
+      type: Array,
+      required: true
+    },
+    subscriptions: {
       type: Array,
       required: true
     }

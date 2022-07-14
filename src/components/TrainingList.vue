@@ -11,6 +11,7 @@
 
 <script>
 import TrainingListItem from './TrainingListItem.vue';
+
 export default {
   name: 'TrainingList',
   components: {

@@ -16,9 +16,10 @@ $cera-pro-font-path: '../public/fonts/CeraPro';
     font-weight: bold;
 }
 
-html {
+html, body {
     font-family: 'Cera Pro';
     font-style: normal;
+    height: fill-available;
 }
 
 h3 {
@@ -49,7 +50,8 @@ h4 {
 }
 
 .content {
-    padding-top: 60px;
+    padding: 60px 0 20px;
+    height: fill-available;
 }
 
 .list-item {
@@ -62,6 +64,13 @@ h4 {
     margin-right: 20px;
 }
 
+.btn-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 15px;
+}
+
 .disabled {
     color: $disabled-text;
     background: $disabled-background;
@@ -69,4 +78,4 @@ h4 {
 
 .active-icon {
     cursor: pointer;
-  }
+}
