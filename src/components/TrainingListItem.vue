@@ -13,17 +13,17 @@
 
 <script>
 export default {
-  name: 'TrainingListItem',
-  props: {
-    training: {
-      type: Object,
-      required: true
+    name: "TrainingListItem",
+    props: {
+        training: {
+            type: Object,
+            required: true
+        },
+        group: {
+            type: Object,
+            required: true
+        }
     },
-    group: {
-      type: Object,
-      required: true
-    }
-  }
 }
 </script>
 

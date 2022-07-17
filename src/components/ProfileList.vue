@@ -5,6 +5,7 @@
       :key="index"
       :profile="profile"
       :subscription="subscriptions.find(subscription => subscription.profileId === profile.id)"
+      :equipmentId="attendings.find(attending => attending.profileId === profile.id)?.equipmentId"
     />
   </div>
 </template>
@@ -22,6 +23,10 @@ export default {
       required: true
     },
     subscriptions: {
+      type: Array,
+      required: true
+    },
+    attendings: {
       type: Array,
       required: true
     }

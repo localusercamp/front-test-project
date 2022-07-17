@@ -4,6 +4,12 @@
     </button>
 </template>
 
+<script>
+export default {
+  name: 'MyButton'
+}
+</script>
+
 <style>
     .my-button {
         cursor: pointer;

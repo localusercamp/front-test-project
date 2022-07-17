@@ -1,4 +1,15 @@
 <template>
+  <MyDialog v-model:show="dialogVisible">
+    <template #header>
+      <h4>Тип тренировки</h4>
+    </template>
+    <template #default>
+      <SelectItemTypeForm url="types" :itemId="training.typeId" @saveForm="saveTrainingType"/>
+    </template>
+    <template #footer>
+      <MyButton @click="closeTrainingTypeForm" class="secondary">Отменить</MyButton>
+    </template>
+  </MyDialog>
   <div class="header" :class="{ header_scroll: isScroll }">
     <router-link to="/" id="back-icon">
       <img src="@/assets/icons/Back.svg">
@@ -11,12 +22,13 @@
         <span v-else>Завтра, {{training.start_time}}</span>
       </div>
     </div>
+    <img class="active-icon" src="@/assets/icons/Filter.svg" @click="showTrainingTypeForm">
   </div>
-  <div class="content">
-    <ProfileList :profiles="profiles" :subscriptions="subscriptions"/>
+    <div class="content">
+    <ProfileList :profiles="profiles" :subscriptions="subscriptions" :attendings="attendings"/>
     <div class="btn-list">
       <MyButton>Сохранить тренировку</MyButton>
-      <MyButton class="secondary">Отменить</MyButton>
+      <MyButton class="secondary">Отмена</MyButton>
     </div>
   </div>
 </template>
@@ -24,14 +36,14 @@
 <script>
 import dateMixin from '@/mixins/dateMixin';
 import ProfileList from '@/components/ProfileList.vue';
-import MyButton from '@/components/UI/MyButton.vue';
+import SelectItemTypeForm from '@/components/SelectItemTypeForm.vue'
 
 export default {
   name: 'TrainingInfoView',
   mixins: [dateMixin],
   components: {
     ProfileList,
-    MyButton
+    SelectItemTypeForm
   },
   props: {
     id: {
@@ -44,7 +56,8 @@ export default {
       group: null,
       profiles: [],
       subscriptions: [],
-      attendings: []
+      attendings: [],
+      dialogVisible: false
     }
   },
   methods: {
@@ -89,6 +102,16 @@ export default {
       } catch (error) {
         alert("Ошибка! " + error);
       }
+    },
+    showTrainingTypeForm() {
+      this.dialogVisible = true;
+    },
+    closeTrainingTypeForm() {
+      this.dialogVisible = false;
+    },
+    saveTrainingType(training_type) {
+      this.training.typeId = training_type;
+      this.closeTrainingTypeForm();
     }
   },
   mounted() {
@@ -115,5 +138,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+  }
+
+  .btn-list {
+    padding: 0 15px;
   }
 </style>
