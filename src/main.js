@@ -9,7 +9,7 @@ import components from '@/components/UI'
 const app = createApp(App)
 
 const axiosInstance = axios.create({
-    baseURL: 'http://localhost:8000/',
+    baseURL: 'http://localhost:8000/'
 })
 app.config.globalProperties.$axios = axiosInstance
 

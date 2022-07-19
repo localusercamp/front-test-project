@@ -22,27 +22,33 @@
         <span v-else>Завтра, {{training.start_time}}</span>
       </div>
     </div>
-    <img class="active-icon" src="@/assets/icons/Filter.svg" @click="showTrainingTypeForm">
+    <img class="clickable" src="@/assets/icons/Filter.svg" @click="showTrainingTypeForm">
   </div>
-    <div class="content">
-    <ProfileList :profiles="profiles" :subscriptions="subscriptions" :attendings="attendings"/>
+  <div class="content">
+    <ProfileListItem
+      v-for="(profile, index) in profiles"
+      :key="index"
+      :profile="profile"
+      :trainingId="training.id"
+      ref="childComponent"
+    />
     <div class="btn-list">
-      <MyButton>Сохранить тренировку</MyButton>
-      <MyButton class="secondary">Отмена</MyButton>
+      <MyButton @click="saveTraining">Сохранить тренировку</MyButton>
+      <MyButton class="secondary" @click="$router.push('/')">Отмена</MyButton>
     </div>
   </div>
 </template>
 
 <script>
 import dateMixin from '@/mixins/dateMixin';
-import ProfileList from '@/components/ProfileList.vue';
+import ProfileListItem from '@/components/ProfileListItem.vue';
 import SelectItemTypeForm from '@/components/SelectItemTypeForm.vue'
 
 export default {
   name: 'TrainingInfoView',
   mixins: [dateMixin],
   components: {
-    ProfileList,
+    ProfileListItem,
     SelectItemTypeForm
   },
   props: {
@@ -55,8 +61,6 @@ export default {
       training: null,
       group: null,
       profiles: [],
-      subscriptions: [],
-      attendings: [],
       dialogVisible: false
     }
   },
@@ -87,22 +91,6 @@ export default {
         alert("Ошибка! " + error);
       }
     },
-    async fetchSubscriptions() {
-      try {
-        const response = await this.$axios.get('subscriptions');
-        this.subscriptions = response.data;
-      } catch (error) {
-        alert("Ошибка! " + error);
-      }
-    },
-    async fetchAttendings() {
-      try {
-        const response = await this.$axios.get('attendings', { params: { trainingId: this.id } });
-        this.attendings = response.data;
-      } catch (error) {
-        alert("Ошибка! " + error);
-      }
-    },
     showTrainingTypeForm() {
       this.dialogVisible = true;
     },
@@ -112,12 +100,21 @@ export default {
     saveTrainingType(training_type) {
       this.training.typeId = training_type;
       this.closeTrainingTypeForm();
+    },
+    async saveTraining() {
+      try {
+        for(let i = 0; i < this.$refs.childComponent.length-1; i++) {
+          await this.$refs.childComponent[i].saveData();
+        }
+        await this.$axios.patch('trainings/' + this.id, { completed: true, typeId: parseInt(this.training.typeId) });
+        this.$router.push('/');
+      } catch (error) {
+        alert("Ошибка! " + error);
+      }
     }
   },
   mounted() {
     this.fetchTraining();
-    this.fetchSubscriptions();
-    this.fetchAttendings();
   }
 }
 </script>

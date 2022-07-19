@@ -1,17 +1,20 @@
 <template>
-  <MyDialog v-model:show="dialogVisible">
+  <MyDialog v-model:show="equipmentsDialogVisible">
     <template #header>
       <h4>Тип инвентаря</h4>
     </template>
     <template #default>
-      <SelectItemTypeForm url="equipments" :itemId="equipment_id" @saveForm="saveEquipments"/>
+      <SelectItemTypeForm url="equipments" :itemId="equipmentId" @saveForm="saveEquipments"/>
     </template>
     <template #footer>
       <MyButton @click="closeEquipmentsForm" class="secondary">Отменить</MyButton>
     </template>
   </MyDialog>
+  <MyDialog v-model:show="profileDialogVisible">
+    <ProfileInfo/>
+  </MyDialog>
   <div class="list-item" :class="visitClasses">
-    <span>
+    <span class="clickable" @click="showProfileInfo">
       {{profile?.last_name}} {{profile?.first_name[0]}}. {{profile?.patronymic[0]}}.
     </span>
     <div class="list-item-icons">
@@ -24,7 +27,7 @@
           d="M14.418 20.164C14.1633 20.164 13.906 20.0666 13.7113 19.8706L10.546 16.7066C10.1553 16.316 10.1553 15.684 10.546 15.2933C10.9366 14.9026 11.5686 14.9026 11.9593 15.2933L14.418 17.7493L20.0393 12.1293C20.43 11.7386 21.062 11.7386 21.4526 12.1293C21.8433 12.52 21.8433 13.152 21.4526 13.5426L15.1246 19.8706C14.93 20.0666 14.674 20.164 14.418 20.164Z"
         />
       </MyCheckIcon>
-      <MyCheckIcon :disabled="visitsLeft === 0 ? true : false" :checked="equipment_id !== null" @click="showEquipmentsForm">
+      <MyCheckIcon :disabled="visitsLeft === 0 ? true : false" :checked="equipmentId !== null" @click="showEquipmentsForm">
         <path 
           d="M10.22 4.66667C6.84667 4.66667 4.66667 6.97733 4.66667 10.5547V21.4453C4.66667 25.0227 6.84667 27.3333 10.22 27.3333H21.7773C25.152 27.3333 27.3333 25.0227 27.3333 21.4453V10.5547C27.3333 6.97733 25.152 4.66667 21.7787 4.66667H10.22ZM21.7773 29.3333H10.22C5.70133 29.3333 2.66667 26.1627 2.66667 21.4453V10.5547C2.66667 5.83733 5.70133 2.66667 10.22 2.66667H21.7787C26.2973 2.66667 29.3333 5.83733 29.3333 10.5547V21.4453C29.3333 26.1627 26.2973 29.3333 21.7773 29.3333Z"
         />
@@ -38,29 +41,32 @@
 
 <script>
 import SelectItemTypeForm from '@/components/SelectItemTypeForm.vue'
+import ProfileInfo from '@/components/ProfileInfo.vue'
+
 export default {
   name: 'ProfileListItem',
   components: {
-    SelectItemTypeForm
+    SelectItemTypeForm,
+    ProfileInfo
   },
   props: {
     profile: {
       type: Object,
       required: true
     },
-    subscription: {
-      type: Object,
+    trainingId: {
       required: true
-    },
-    equipmentId: {
-      default: null
     }
   },
   data() {
     return {
+      subscription: null,
+      equipmentId: null,
+      attendingId: null,
       visited: false,
-      equipment_id: this.equipmentId,
-      dialogVisible: false
+      count_visited: 0,
+      equipmentsDialogVisible: false,
+      profileDialogVisible: false
     }
   },
   computed: {
@@ -79,18 +85,85 @@ export default {
       if(this.visitsLeft !== 0) {
         this.visited =! this.visited;
       }
+      if(this.visited) {
+        this.count_visited += 1;
+      } else {
+        this.count_visited -= 1;
+      }
     },
     showEquipmentsForm() {
-      this.dialogVisible = true;
+      this.equipmentsDialogVisible = true;
     },
     closeEquipmentsForm() {
-      this.dialogVisible = false;
+      this.equipmentsDialogVisible = false;
+    },
+    showProfileInfo() {
+      this.profileDialogVisible = true;
+    },
+    closeProfileInfo() {
+      this.profileDialogVisible = false;
     },
     saveEquipments(equipment_id) {
-      this.equipment_id = equipment_id;
+      this.equipmentId = equipment_id;
       this.closeEquipmentsForm();
+    },
+    async fetchSubscription() {
+      try {
+        const response = await this.$axios.get('subscriptions', { params: { profileId: this.profile.id  } });
+        this.subscription = response.data[0];
+        this.count_visited = response.data[0]?.visited;
+      } catch (error) {
+        alert("Ошибка! " + error);
+      }
+    },
+    async fetchAttending() {
+      try {
+        const response = await this.$axios.get('attendings', { params: { trainingId: this.trainingId, profileId: this.profile.id } });
+        if (response.data[0] !== undefined) {
+          this.attendingId = response.data[0].id;
+          this.equipmentId = response.data[0].equipmentId;
+          this.visited = true;
+        } else {
+          // this.attending = {
+          //   trainingId: this.trainingId,
+          //   profileId: this.profile.id,
+          //   equipmentId: null
+          // };
+        }
+      } catch (error) {
+        alert("Ошибка! " + error);
+      }
+    },
+    async saveData() {
+      try {
+        if(this.attendingId) {
+          if(this.count_visited != this.subscription?.visited) {
+            await this.$axios.delete('attendings/' + this.attendingId);
+          } else {
+            await this.$axios.patch('attendings/' + this.attendingId, { equipmentId: parseInt(this.equipmentId)});
+          }
+        } else {
+          if(this.visited) {
+            await this.$axios.post('attendings', { 
+                trainingId: this.trainingId,
+                profileId: this.profile?.id,
+                equipmentId: this.equipmentId
+              }
+            )
+          }
+        }
+        if(this.subscription) {
+          await this.$axios.patch('subscriptions/' + this.subscription.id, { visited: this.count_visited })
+        }
+      } catch (error) {
+        alert("Ошибка! " + error);
+      }
     }
   },
+  mounted() {
+    this.fetchSubscription();
+    this.fetchAttending();
+  }
 }
 </script>
 
