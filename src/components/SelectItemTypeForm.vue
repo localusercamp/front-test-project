@@ -1,5 +1,5 @@
 <template>
-    <form @submit.prevent>
+    <form @submit.prevent class="type-form">
       <div v-for="(item, index) in items" :key="index" class="list-item">
         <span class="title">{{item.title}}</span>
         <MyRadioButton :value="item.id" v-model="selectedValue"/>
@@ -49,6 +49,10 @@ export default {
   .list-item {
     align-items: center;
     justify-content: space-between;
+  }
+
+  .type-form {
+    margin-top: 25px;
   }
 
   .btn-save {

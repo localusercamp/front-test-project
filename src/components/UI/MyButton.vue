@@ -10,35 +10,52 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
+    @import '@/styles/colors';
+
     .my-button {
         cursor: pointer;
         padding: 15px 22px;
         color: white;
         font-size: 16px;
-        background-color: #0E77BA;
-        border: 3px solid white;
+        background-color: $blue-base;
+        border: 1px solid white;
         border-radius: 15px;
+        font-family: 'Cera Pro';
     }
 
     .my-button:hover {
-        background-color: #0A67A4;
+        background-color: $blue-hover;
     }
     
     .my-button:active {
-        border-color: #80CAFF;
+        border-color: $blue-active;
     }
 
     .secondary {
         background-color: white;
-        color: #0E77BA;
+        color: $blue-base;
     }
 
     .secondary:hover {
-        background-color: #DFF2FF;
+        background-color: $secondary-hover;
     }
 
     .secondary:active {
-        border-color: #80CAFF;
+        border-color: $secondary-active;
+    }
+
+    .outlined {
+        background-color: white;
+        color: $blue-base;
+        border-color: $blue-base;
+    }
+
+    .outlined:hover {
+        background-color: $secondary-hover;
+    }
+
+    .outlined:active {
+        border-color: $secondary-active;
     }
 </style>

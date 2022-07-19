@@ -42,10 +42,6 @@ export default {
         width: 100%;
     }
 
-    #default {
-        margin-top: 25px;
-    }
-
     .my-dialog {
         top: 0;
         bottom: 0;

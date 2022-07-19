@@ -25,13 +25,15 @@
     <img class="clickable" src="@/assets/icons/Filter.svg" @click="showTrainingTypeForm">
   </div>
   <div class="content">
-    <ProfileListItem
-      v-for="(profile, index) in profiles"
-      :key="index"
-      :profile="profile"
-      :trainingId="training.id"
-      ref="childComponent"
-    />
+    <div>
+      <ProfileListItem
+        v-for="(profile, index) in profiles"
+        :key="index"
+        :profile="profile"
+        :trainingId="training.id"
+        ref="childComponent"
+      />
+    </div>
     <div class="btn-list">
       <MyButton @click="saveTraining">Сохранить тренировку</MyButton>
       <MyButton class="secondary" @click="$router.push('/')">Отмена</MyButton>

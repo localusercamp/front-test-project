@@ -9,6 +9,7 @@ export default {
         convertStringToDate(date) {
             let d = date.split(".");
             date = new Date(d[2] + '.' + d[1] + '.' + d[0]);
+            date.setHours(0, 0, 0, 0);
             return date;
         },
         getDayAndMonth(date) {
@@ -16,6 +17,9 @@ export default {
         },
         getFullDate(date) {
             return `${date.getDate()} ${this.months[date.getMonth()]} ${date.getFullYear()}`;
+        },
+        dateDiff(a, b) {
+            return Math.round((b.getTime() - a.getTime()) / (1000*60*60*24));
         }
     },
     computed: {

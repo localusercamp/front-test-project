@@ -11,7 +11,7 @@
     </template>
   </MyDialog>
   <MyDialog v-model:show="profileDialogVisible">
-    <ProfileInfo/>
+    <ProfileInfo :profile="profile" :subscription="subscription"/>
   </MyDialog>
   <div class="list-item" :class="visitClasses">
     <span class="clickable" @click="showProfileInfo">
