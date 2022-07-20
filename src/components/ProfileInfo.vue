@@ -53,8 +53,7 @@ export default {
             required: true
         },
         subscription: {
-            type: Object,
-            required: true
+            type: Object
         }
     },
     data() {
@@ -67,7 +66,7 @@ export default {
             return this.currentDate.getFullYear() - this.convertStringToDate(this.profile.birth_date).getFullYear();
         },
         splitClientFIO() {
-            if(this.profile.client) {
+            if(this.profile?.client) {
                 let el = this.profile.client.fio.split(' ');
                 return el;
             } else return '';

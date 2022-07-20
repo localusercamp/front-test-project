@@ -18,7 +18,7 @@
       {{profile?.last_name}} {{profile?.first_name[0]}}. {{profile?.patronymic[0]}}.
     </span>
     <div class="list-item-icons">
-      <MyCheckIcon :disabled="visitsLeft === 0 ? true : false" :checked="visited" @click="setMark">
+      <MyCheckIcon :disabled="disabled" :checked="visited" @click="setMark">
         <path
           d="M10.22 4.66667C6.84666 4.66667 4.66666 6.97734 4.66666 10.5547V21.4453C4.66666 25.0227 6.84666 27.3333 10.22 27.3333H21.7773C25.152 27.3333 27.3333 25.0227 27.3333 21.4453V10.5547C27.3333 6.97734 25.152 4.66667 21.7787 4.66667H10.22ZM21.7773 29.3333H10.22C5.70133 29.3333 2.66666 26.1627 2.66666 21.4453V10.5547C2.66666 5.83734 5.70133 2.66667 10.22 2.66667H21.7787C26.2973 2.66667 29.3333 5.83734 29.3333 10.5547V21.4453C29.3333 26.1627 26.2973 29.3333 21.7773 29.3333Z"
         />
@@ -27,7 +27,7 @@
           d="M14.418 20.164C14.1633 20.164 13.906 20.0666 13.7113 19.8706L10.546 16.7066C10.1553 16.316 10.1553 15.684 10.546 15.2933C10.9366 14.9026 11.5686 14.9026 11.9593 15.2933L14.418 17.7493L20.0393 12.1293C20.43 11.7386 21.062 11.7386 21.4526 12.1293C21.8433 12.52 21.8433 13.152 21.4526 13.5426L15.1246 19.8706C14.93 20.0666 14.674 20.164 14.418 20.164Z"
         />
       </MyCheckIcon>
-      <MyCheckIcon :disabled="visitsLeft === 0 ? true : false" :checked="equipmentId !== null" @click="showEquipmentsForm">
+      <MyCheckIcon :disabled="disabled" :checked="equipmentId !== null" @click="showEquipmentsForm">
         <path 
           d="M10.22 4.66667C6.84667 4.66667 4.66667 6.97733 4.66667 10.5547V21.4453C4.66667 25.0227 6.84667 27.3333 10.22 27.3333H21.7773C25.152 27.3333 27.3333 25.0227 27.3333 21.4453V10.5547C27.3333 6.97733 25.152 4.66667 21.7787 4.66667H10.22ZM21.7773 29.3333H10.22C5.70133 29.3333 2.66667 26.1627 2.66667 21.4453V10.5547C2.66667 5.83733 5.70133 2.66667 10.22 2.66667H21.7787C26.2973 2.66667 29.3333 5.83733 29.3333 10.5547V21.4453C29.3333 26.1627 26.2973 29.3333 21.7773 29.3333Z"
         />
@@ -40,11 +40,13 @@
 </template>
 
 <script>
+import dateMixin from '@/mixins/dateMixin'
 import SelectItemTypeForm from '@/components/SelectItemTypeForm.vue'
 import ProfileInfo from '@/components/ProfileInfo.vue'
 
 export default {
   name: 'ProfileListItem',
+  mixins: [dateMixin],
   components: {
     SelectItemTypeForm,
     ProfileInfo
@@ -56,11 +58,13 @@ export default {
     },
     trainingId: {
       required: true
+    },
+    subscription: {
+      type: Object
     }
   },
   data() {
     return {
-      subscription: null,
       equipmentId: null,
       attendingId: null,
       visited: false,
@@ -70,19 +74,30 @@ export default {
     }
   },
   computed: {
+    disabled() {
+      return this.subscribtion || this.visitsLeft === 0 || this.leftAbonementDays === 0;
+    },
+    leftAbonementDays() {
+      if(this.subscription) {
+        let days = this.dateDiff(this.currentDate, this.convertStringToDate(this.subscription.expires_at));
+        return days > 0 ? days : 0;
+      } else return 0;
+    },
     visitsLeft() {
-      return this.subscription?.max_visits - this.subscription?.visited;
+      if(this.subscription) {
+        return this.subscription?.max_visits - this.subscription?.visited;
+      } else return 0;
     },
     visitClasses() {
       return {
         'one-visit': this.visitsLeft === 1,
-        'disabled': this.visitsLeft === 0
+        'disabled': this.disabled
       }
     }
   },
   methods: {
     setMark() {
-      if(this.visitsLeft !== 0) {
+      if(!this.disabled) {
         this.visited =! this.visited;
       }
       if(this.visited) {
@@ -106,15 +121,6 @@ export default {
     saveEquipments(equipment_id) {
       this.equipmentId = equipment_id;
       this.closeEquipmentsForm();
-    },
-    async fetchSubscription() {
-      try {
-        const response = await this.$axios.get('subscriptions', { params: { profileId: this.profile.id  } });
-        this.subscription = response.data[0];
-        this.count_visited = response.data[0]?.visited;
-      } catch (error) {
-        alert("Ошибка! " + error);
-      }
     },
     async fetchAttending() {
       try {
@@ -155,7 +161,6 @@ export default {
     }
   },
   mounted() {
-    this.fetchSubscription();
     this.fetchAttending();
   }
 }

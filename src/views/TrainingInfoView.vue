@@ -30,6 +30,7 @@
         v-for="(profile, index) in profiles"
         :key="index"
         :profile="profile"
+        :subscription="subscriptions.find(subscription => subscription.profileId == profile.id)"
         :trainingId="training.id"
         ref="childComponent"
       />
@@ -63,6 +64,7 @@ export default {
       training: null,
       group: null,
       profiles: [],
+      subscriptions: [],
       dialogVisible: false
     }
   },
@@ -89,6 +91,18 @@ export default {
       try {
         const response = await this.$axios.get('profiles', { params: { groupId: this.training.groupId, _expand: 'client' } });
         this.profiles = response.data;
+        this.fetchSubscriptions();
+      } catch (error) {
+        alert("Ошибка! " + error);
+      }
+    },
+    async fetchSubscriptions() {
+      let profiles_id = this.profiles.map(profile => {
+        return profile.id;
+      })
+      try {
+        const response = await this.$axios.get('subscriptions', { params: { profileId: profiles_id } });
+        this.subscriptions = response.data;
       } catch (error) {
         alert("Ошибка! " + error);
       }

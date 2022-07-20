@@ -3,10 +3,13 @@
         <div class="card">
             <div class="card-content">
                 <span class="card-content-title">Абонемент</span>
-                <div class="card-content-body">
+                <div v-if="subscription" class="card-content-body">
                     <span>Посещений: {{ subscription.visited }}/{{ subscription.max_visits }}</span>
                     <span>Дней: {{ leftAbonementDays }}/{{ dateDiff(createdAt, expiresAt) }}</span>
                     <span>Приобретен: {{ subscription.created_at }}</span>
+                </div>
+                <div v-else class="card-content-body">
+                    <h4>Нет абонемента</h4>
                 </div>
             </div>
             <div class="edge">
@@ -24,20 +27,21 @@ export default {
   mixins: [dateMixin],
   props: {
     subscription: {
-        type: Object,
-        required: true
+        type: Object
     }
   },
   computed: {
     expiresAt() {
-        return this.convertStringToDate(this.subscription.expires_at);
+        return this.subscription ? this.convertStringToDate(this.subscription.expires_at) : '';
     },
     createdAt() {
-        return this.convertStringToDate(this.subscription.created_at);
+        return this.subscription ? this.convertStringToDate(this.subscription.created_at) : '';
     },
     leftAbonementDays() {
-        let days = this.dateDiff(this.currentDate, this.expiresAt);
-        return days > 0 ? days : 0;
+        if(this.subscription) {
+            let days = this.dateDiff(this.currentDate, this.expiresAt);
+            return days > 0 ? days : 0;
+        } else return 0;
     }
   }
 }
