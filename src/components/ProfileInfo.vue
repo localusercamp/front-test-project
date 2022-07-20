@@ -21,12 +21,16 @@
                     <span>{{ splitClientFIO[0] }}</span>
                     <span>{{ splitClientFIO[1] }} {{ splitClientFIO[2] }}</span>
                 </div>
-                <MyButton class="outlined">Позвонить</MyButton>
+                <a :href="`tel:${profile.client.phone}`">
+                    <MyButton class="outlined">Позвонить</MyButton>
+                </a>
             </div>
-            <MyButton class="phone-btn">
-                <img class="left" src="@/assets/icons/Phone.svg">
-                <span>Позвонить</span>
-            </MyButton>
+            <a :href="`tel:${profile.phone}`">
+                <MyButton class="phone-btn">
+                    <img class="left" src="@/assets/icons/Phone.svg">
+                    <span>Позвонить</span>
+                </MyButton>
+            </a>
         </div>
     </div>
 </template>
@@ -163,6 +167,7 @@ export default {
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 100%;
     }
     
     .left {

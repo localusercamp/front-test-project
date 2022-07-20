@@ -320,25 +320,25 @@
     {
       "trainingId": 2,
       "profileId": 10,
-      "equipmentId": "1",
+      "equipmentId": 1,
       "id": 7
     },
     {
       "trainingId": 2,
       "profileId": 13,
-      "equipmentId": "2",
+      "equipmentId": 2,
       "id": 8
     },
     {
       "trainingId": 3,
       "profileId": 6,
-      "equipmentId": "2",
+      "equipmentId": 2,
       "id": 9
     },
     {
       "trainingId": 1,
       "profileId": 6,
-      "equipmentId": "2",
+      "equipmentId": 2,
       "id": 10
     }
   ],
@@ -403,8 +403,8 @@
       "id": 8,
       "max_visits": 8,
       "visited": 3,
-      "expires_at": "27.08.2022",
-      "created_at": "27.07.2022",
+      "expires_at": "07.08.2022",
+      "created_at": "07.07.2022",
       "profileId": 8
     },
     {

@@ -5,7 +5,7 @@
                 <span class="card-content-title">Абонемент</span>
                 <div class="card-content-body">
                     <span>Посещений: {{ subscription.visited }}/{{ subscription.max_visits }}</span>
-                    <span>Дней: {{ dateDiff(currentDate, convertStringToDate(subscription.expires_at)) }}/{{ dateDiff(convertStringToDate(subscription.created_at), convertStringToDate(subscription.expires_at)) }}</span>
+                    <span>Дней: {{ leftAbonementDays }}/{{ dateDiff(createdAt, expiresAt) }}</span>
                     <span>Приобретен: {{ subscription.created_at }}</span>
                 </div>
             </div>
@@ -29,7 +29,16 @@ export default {
     }
   },
   computed: {
-
+    expiresAt() {
+        return this.convertStringToDate(this.subscription.expires_at);
+    },
+    createdAt() {
+        return this.convertStringToDate(this.subscription.created_at);
+    },
+    leftAbonementDays() {
+        let days = this.dateDiff(this.currentDate, this.expiresAt);
+        return days > 0 ? days : 0;
+    }
   }
 }
 </script>

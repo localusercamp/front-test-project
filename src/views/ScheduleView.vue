@@ -38,7 +38,7 @@ export default {
   methods: {
     separateTrainings(new_trainings) {
       let subarray = [];
-      const unique_dates = [...new Set(new_trainings.map(new_training => new_training.date))];
+      const unique_dates = [...new Set(new_trainings.map(new_training => new_training.date))].sort((a, b) => this.convertStringToDate(a) - this.convertStringToDate(b));
       unique_dates.forEach(date => {
         subarray = new_trainings.filter(new_training => new_training.date === date);
         subarray.forEach(training => delete training.date);

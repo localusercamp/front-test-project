@@ -58,6 +58,6 @@ export default {
         padding: 20px 0;
         background: white;
         border-radius: 18px;
-        width: 80%;
+        width: 90%;
     }
 </style>
