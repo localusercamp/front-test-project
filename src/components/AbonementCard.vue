@@ -50,12 +50,21 @@ export default {
     }
 
     .card-content {
+        display: flex;
+        flex-direction: column;
         padding: 15px 20px;
+        font-size: 14px;
+    }
+
+    .card-content-title {
+        margin-bottom: 10px;
+        color: $box-title;
     }
 
     .card-content-body {
         display: flex;
         flex-direction: column;
+        font-weight: bold;
     }
 
     .edge {

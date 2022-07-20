@@ -87,7 +87,7 @@ export default {
     },
     async fetchProfiles() {
       try {
-        const response = await this.$axios.get('profiles', { params: { groupId: this.training.groupId } });
+        const response = await this.$axios.get('profiles', { params: { groupId: this.training.groupId, _expand: 'client' } });
         this.profiles = response.data;
       } catch (error) {
         alert("Ошибка! " + error);

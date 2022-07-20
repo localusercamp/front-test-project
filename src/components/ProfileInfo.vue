@@ -55,7 +55,6 @@ export default {
     },
     data() {
         return {
-            client: null,
             attendings: []
         }
     },
@@ -64,8 +63,8 @@ export default {
             return this.currentDate.getFullYear() - this.convertStringToDate(this.profile.birth_date).getFullYear();
         },
         splitClientFIO() {
-            if(this.client) {
-                let el = this.client.fio.split(' ');
+            if(this.profile.client) {
+                let el = this.profile.client.fio.split(' ');
                 return el;
             } else return '';
         },
@@ -81,14 +80,6 @@ export default {
         }
     },
     methods: {
-        async fetchClients() {
-            try {
-                const response = await this.$axios.get(`profiles/${this.profile.id}/clients`);
-                this.client = response.data[0];
-            } catch (error) {
-                alert("Ошибка! " + error);
-            }
-        },
         async fetchAttendings() {
             try {
                 const response = await this.$axios.get(`profiles/${this.profile.id}/attendings`);
@@ -99,13 +90,14 @@ export default {
         }
     },
     mounted() {
-        this.fetchClients();
         this.fetchAttendings();
     }
 }
 </script>
 
 <style lang="scss" scoped>
+    @import '@/styles/colors';
+
     %container {
         display: flex;
         flex-direction: column;
@@ -159,6 +151,7 @@ export default {
 
     .box-header {
         margin-bottom: 10px;
+        color: $box-title;
     }
 
     .outlined {

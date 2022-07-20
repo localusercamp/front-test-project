@@ -123,12 +123,6 @@ export default {
           this.attendingId = response.data[0].id;
           this.equipmentId = response.data[0].equipmentId;
           this.visited = true;
-        } else {
-          // this.attending = {
-          //   trainingId: this.trainingId,
-          //   profileId: this.profile.id,
-          //   equipmentId: null
-          // };
         }
       } catch (error) {
         alert("Ошибка! " + error);

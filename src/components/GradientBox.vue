@@ -2,7 +2,7 @@
     <div class="gradient-box">
         <slot>
             <span class="value">{{ value }}</span>
-            <span>{{ title }}</span>
+            <span class="title">{{ title }}</span>
         </slot>
     </div>
 </template>
@@ -38,5 +38,9 @@ export default {
 
     .value {
         font-size: 44px;
+    }
+
+    .title {
+        font-size: 12px;
     }
 </style>
