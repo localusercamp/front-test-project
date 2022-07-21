@@ -57,7 +57,7 @@ export default {
     },
     async saveData() {
       try {
-        if(this.visited) {
+        if(this.attending.visited) {
           await this.$axios.post('attendings', { 
               trainingId: this.trainingId,
               profileId: this.profile.id,

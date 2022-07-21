@@ -14,6 +14,12 @@ export default createStore({
       } else {
         state.saved_trainings.push(training);   
       }
+    },
+    deleteTraining(state, training_id) {
+      let index = state.saved_trainings.findIndex(saved_training => training_id == saved_training.training.id);
+      if(index > -1) {
+        state.saved_trainings.splice(index, 1);
+      }
     }
   },
   actions: {

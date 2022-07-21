@@ -1,12 +1,6 @@
 <template>
   <div class="header" :class="{ header_scroll: isScroll }">
     <img src="@/assets/icons/Back.svg" class="back-icon" @click='$router.back'>
-    <!-- <router-link v-if="training?.completed" to="/" class="back-icon">
-      <img src="@/assets/icons/Back.svg">
-    </router-link>
-    <router-link v-else :to="`/training_info/${id}`" class="back-icon">
-      <img src="@/assets/icons/Back.svg">
-    </router-link> -->
     <div class="group-info">
       <h4 id="group-title">{{group?.title}}</h4>
       <div v-if="training?.date">
@@ -157,6 +151,7 @@ export default {
           await this.$refs.childComponent[i].saveData();
         }
         await this.$axios.patch('trainings/' + this.id, { completed: true, typeId: parseInt(this.training.typeId) });
+        this.$store.commit('deleteTraining', { training_id: this.training.id });
         this.$router.push('/');
       } catch (error) {
         alert("Ошибка! " + error);

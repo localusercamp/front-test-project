@@ -122,7 +122,7 @@ export default {
     },
     saveTrainingVuex() {
       let attendings = [];
-      for(let i = 0; i < this.$refs.childComponent.length-1; i++) {
+      for(let i = 0; i < this.$refs.childComponent.length; i++) {
         attendings.push(this.$refs.childComponent[i].saveDataVuex());
       }
       this.$store.commit('addTraining', { training: this.training, attendings });
