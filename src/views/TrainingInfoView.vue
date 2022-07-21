@@ -36,7 +36,7 @@
       />
     </div>
     <div class="btn-list">
-      <MyButton @click="saveTraining">Сохранить тренировку</MyButton>
+      <MyButton @click="saveTrainingVuex">Сохранить тренировку</MyButton>
       <MyButton class="secondary" @click="$router.push('/')">Отмена</MyButton>
     </div>
   </div>
@@ -73,6 +73,9 @@ export default {
       try {
         const response = await this.$axios.get('trainings/' + this.id);
         this.training = response.data;
+        if(this.training.completed) {
+          this.$router.push('/training_summary/' + this.id);
+        }
         this.fetchGroup();
         this.fetchProfiles();
       } catch (error) {
@@ -117,20 +120,24 @@ export default {
       this.training.typeId = training_type;
       this.closeTrainingTypeForm();
     },
-    async saveTraining() {
-      try {
-        for(let i = 0; i < this.$refs.childComponent.length-1; i++) {
-          await this.$refs.childComponent[i].saveData();
-        }
-        await this.$axios.patch('trainings/' + this.id, { completed: true, typeId: parseInt(this.training.typeId) });
-        this.$router.push('/');
-      } catch (error) {
-        alert("Ошибка! " + error);
+    saveTrainingVuex() {
+      let attendings = [];
+      for(let i = 0; i < this.$refs.childComponent.length-1; i++) {
+        attendings.push(this.$refs.childComponent[i].saveDataVuex());
       }
+      this.$store.commit('addTraining', { training: this.training, attendings });
+      this.$router.push('/training_summary/' + this.training.id);
     }
   },
-  mounted() {
-    this.fetchTraining();
+  created() {
+    let saved_training = this.$store.state.saved_trainings.find(saved_training => this.id == saved_training.training.id);
+    if(saved_training != undefined) {
+      this.training = saved_training.training;
+      this.fetchGroup();
+      this.fetchProfiles();
+    } else {
+      this.fetchTraining();
+    }
   }
 }
 </script>

@@ -1,5 +1,15 @@
 <template>
-  <router-link :to="{name: 'training_info', params: {id: training.id}}" class="list-item">
+  <router-link v-if="training?.completed" :to="{name: 'training_summary', params: {id: training.id}}" class="list-item">
+    <span id="training-time" class="list-item-left">{{training?.start_time}} - {{training?.finish_time}}</span>
+    <div class="group-info">
+      <div>
+        <span id="group-title">{{group?.title}}</span>
+        <img id="check-mark" v-if="training.completed" src="@/assets/icons/Check_Mark.svg">
+      </div>
+      <span id="group-address">{{group?.address}}</span>
+    </div>
+  </router-link>
+  <router-link v-else :to="{name: 'training_info', params: {id: training.id}}" class="list-item">
     <span id="training-time" class="list-item-left">{{training?.start_time}} - {{training?.finish_time}}</span>
     <div class="group-info">
       <div>

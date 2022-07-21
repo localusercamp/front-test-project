@@ -68,7 +68,6 @@ export default {
       equipmentId: null,
       attendingId: null,
       visited: false,
-      count_visited: 0,
       equipmentsDialogVisible: false,
       profileDialogVisible: false
     }
@@ -100,11 +99,6 @@ export default {
       if(!this.disabled) {
         this.visited =! this.visited;
       }
-      if(this.visited) {
-        this.count_visited += 1;
-      } else {
-        this.count_visited -= 1;
-      }
     },
     showEquipmentsForm() {
       this.equipmentsDialogVisible = true;
@@ -134,34 +128,22 @@ export default {
         alert("Ошибка! " + error);
       }
     },
-    async saveData() {
-      try {
-        if(this.attendingId) {
-          if(this.count_visited != this.subscription?.visited) {
-            await this.$axios.delete('attendings/' + this.attendingId);
-          } else {
-            await this.$axios.patch('attendings/' + this.attendingId, { equipmentId: parseInt(this.equipmentId)});
-          }
-        } else {
-          if(this.visited) {
-            await this.$axios.post('attendings', { 
-                trainingId: this.trainingId,
-                profileId: this.profile?.id,
-                equipmentId: this.equipmentId
-              }
-            )
-          }
-        }
-        if(this.subscription) {
-          await this.$axios.patch('subscriptions/' + this.subscription.id, { visited: this.count_visited })
-        }
-      } catch (error) {
-        alert("Ошибка! " + error);
-      }
+    saveDataVuex() {
+      return { id: this.attendingId, profileId: this.profile.id, equipmentId: this.equipmentId, visited: this.visited };
     }
   },
-  mounted() {
-    this.fetchAttending();
+  created() {
+    let saved_training = this.$store.state.saved_trainings.find(saved_training => this.trainingId == saved_training.training.id);
+    if(saved_training != undefined) {
+      let attending = saved_training.attendings.find(attending => attending.profileId == this.profile.id);
+      if(attending != undefined) {
+        this.attendingId = attending.id;
+        this.equipmentId = attending.equipmentId;
+        this.visited = attending.visited;
+      }
+    } else {
+      this.fetchAttending();
+    }
   }
 }
 </script>

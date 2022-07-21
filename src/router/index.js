@@ -12,6 +12,16 @@ const routes = [
     name: 'training_info',
     props: true,
     component: () => import('@/views/TrainingInfoView.vue')
+  },
+  {
+    path: '/training_summary/:id',
+    name: 'training_summary',
+    props: true,
+    component: () => import('@/views/TrainingSummaryView.vue'),
+    // beforeEnter: (to, from) => {
+    //   // reject the navigation
+    //   return false
+    // },
   }
 ]
 

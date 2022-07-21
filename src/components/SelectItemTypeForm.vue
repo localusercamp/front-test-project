@@ -39,7 +39,7 @@ export default {
       this.$emit('saveForm', this.selectedValue);
     }
   },
-  mounted() {
+  created() {
     this.fetchItems();
   }
 }
