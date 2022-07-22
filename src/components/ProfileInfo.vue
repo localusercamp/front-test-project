@@ -85,8 +85,10 @@ export default {
     methods: {
         async fetchAttendings() {
             try {
-                const response = await this.$axios.get(`profiles/${this.profile.id}/attendings`);
-                this.attendings = response.data;
+                const response = await this.$axios.get(`profiles/${this.profile.id}/attendings`, { params: {
+                    _expand: 'training'
+                }});
+                this.attendings = response.data.filter(attending => attending.training.typeId == 1);
             } catch (error) {
                 alert("Ошибка! " + error);
             }
