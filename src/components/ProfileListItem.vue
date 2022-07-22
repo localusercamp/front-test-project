@@ -74,7 +74,7 @@ export default {
   },
   computed: {
     disabled() {
-      return this.subscribtion || this.visitsLeft === 0 || this.leftAbonementDays === 0;
+      return this.visitsLeft === 0 || this.leftAbonementDays === 0;
     },
     leftAbonementDays() {
       if(this.subscription) {
@@ -99,9 +99,15 @@ export default {
       if(!this.disabled) {
         this.visited =! this.visited;
       }
+
+      if(!this.visited) {
+        this.equipmentId = null;
+      }
     },
     showEquipmentsForm() {
-      this.equipmentsDialogVisible = true;
+      if(!this.disabled) {
+        this.equipmentsDialogVisible = true;
+      }
     },
     closeEquipmentsForm() {
       this.$refs.dialogEquipments.hideBody();
@@ -114,6 +120,7 @@ export default {
     },
     saveEquipments(equipment_id) {
       this.equipmentId = equipment_id;
+      this.visited = true;
       this.closeEquipmentsForm();
     },
     async fetchAttending() {

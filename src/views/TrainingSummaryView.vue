@@ -147,11 +147,11 @@ export default {
     },
     async saveTraining() {
       try {
-        for(let i = 0; i < this.$refs.childComponent.length-1; i++) {
+        for(let i = 0; i < this.$refs.childComponent.length; i++) {
           await this.$refs.childComponent[i].saveData();
         }
         await this.$axios.patch('trainings/' + this.id, { completed: true, typeId: parseInt(this.training.typeId) });
-        this.$store.commit('deleteTraining', { training_id: this.training.id });
+        this.$store.commit('deleteTraining', this.training.id);
         this.$router.push('/');
       } catch (error) {
         alert("Ошибка! " + error);

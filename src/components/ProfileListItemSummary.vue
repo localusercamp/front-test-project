@@ -61,7 +61,7 @@ export default {
           await this.$axios.post('attendings', { 
               trainingId: this.trainingId,
               profileId: this.profile.id,
-              equipmentId: this.attending.equipmentId
+              equipmentId: parseInt(this.attending.equipmentId)
             }
           )
         }
