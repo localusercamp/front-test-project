@@ -85,6 +85,7 @@ export default {
   .index {
     margin-right: 18px;
     color: #B4C9D6;
+    align-self: center;
   }
   
   .equipment-title {

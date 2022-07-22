@@ -12,7 +12,7 @@
                 <GradientBox class="left" :value="profileLevel" title="уровень"/>
                 <GradientBox :value="profileVisits" title="занятий"/>
             </div>
-            <AbonementCard class="abonement-card" :subscription="subscription"/>
+            <AbonementCard :subscription="subscription"/>
         </div>
         <div class="profile-contacts">
             <span class="box-header">Контактное лицо</span>
@@ -80,7 +80,7 @@ export default {
         },
         profileVisits() {
             return this.attendings.length;
-        }
+        },
     },
     methods: {
         async fetchAttendings() {

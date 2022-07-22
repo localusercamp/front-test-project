@@ -1,5 +1,5 @@
 <template>
-    <div class="abonement-widget">
+    <div class="abonement-widget" :class="abonementClasses">
         <div class="card">
             <div class="card-content">
                 <span class="card-content-title">Абонемент</span>
@@ -41,7 +41,15 @@ export default {
         if(this.subscription) {
             let days = this.dateDiff(this.currentDate, this.expiresAt);
             return days > 0 ? days : 0;
-        } else return 0;
+        } else {
+            return 0;
+        }
+    },
+    abonementClasses() {
+        return {
+            'used-up': this.leftAbonementDays == 0 || this.subscription?.max_visits - this.subscription?.visited == 0,
+            'almost-used-up': this.leftAbonementDays == 1 || this.subscription?.max_visits - this.subscription?.visited == 1
+        }
     }
   }
 }
@@ -75,6 +83,7 @@ export default {
                     display: flex;
                     flex-direction: column;
                     font-weight: bold;
+                    color: #39505C;
                 }
             }
 
@@ -92,6 +101,46 @@ export default {
                     border-radius: 100% 0 0 100% / 50% 0 0 50%;
                     background: white;
                 }
+            }
+        }
+    }
+
+    .almost-used-up {
+        .card {
+            background: #FCFAD3;
+
+            .card-content {
+                .card-content-title {
+                    color: #A5A685;
+                }
+
+                .card-content-body {
+                    color: #5C5C39;
+                }
+            }
+            
+            .edge {
+                background: #E6E7BD;
+            }
+        }
+    }
+
+    .used-up {
+        .card {
+            background: #FCDBDB;
+
+            .card-content {
+                .card-content-title {
+                    color: #C39393;
+                }
+
+                .card-content-body {
+                    color: #721E1E;
+                }
+            }
+
+            .edge {
+                background: #ECBDBD;
             }
         }
     }
