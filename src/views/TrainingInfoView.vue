@@ -1,5 +1,5 @@
 <template>
-  <MyDialog v-model:show="dialogVisible">
+  <MyDialog v-model:show="dialogVisible" ref="dialog">
     <template #header>
       <h4>Тип тренировки</h4>
     </template>
@@ -114,7 +114,7 @@ export default {
       this.dialogVisible = true;
     },
     closeTrainingTypeForm() {
-      this.dialogVisible = false;
+      this.$refs.dialog.hideBody();
     },
     saveTrainingType(training_type) {
       this.training.typeId = training_type;
@@ -158,9 +158,9 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
-
-  .btn-list {
-    padding: 0 15px;
+    
+    .btn-list {
+      padding: 0 15px;
+    }
   }
 </style>

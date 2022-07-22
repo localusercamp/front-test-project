@@ -1,5 +1,5 @@
 <template>
-  <MyDialog v-model:show="equipmentsDialogVisible">
+  <MyDialog v-model:show="equipmentsDialogVisible" ref='dialogEquipments'>
     <template #header>
       <h4>Тип инвентаря</h4>
     </template>
@@ -10,7 +10,7 @@
       <MyButton @click="closeEquipmentsForm" class="secondary">Отменить</MyButton>
     </template>
   </MyDialog>
-  <MyDialog v-model:show="profileDialogVisible">
+  <MyDialog v-model:show="profileDialogVisible" ref='dialogProfile'>
     <ProfileInfo :profile="profile" :subscription="subscription"/>
   </MyDialog>
   <div class="list-item" :class="visitClasses">
@@ -104,13 +104,13 @@ export default {
       this.equipmentsDialogVisible = true;
     },
     closeEquipmentsForm() {
-      this.equipmentsDialogVisible = false;
+      this.$refs.dialogEquipments.hideBody();
     },
     showProfileInfo() {
       this.profileDialogVisible = true;
     },
     closeProfileInfo() {
-      this.profileDialogVisible = false;
+      this.$refs.dialogProfile.hideBody();
     },
     saveEquipments(equipment_id) {
       this.equipmentId = equipment_id;
@@ -157,11 +157,11 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-  }
-  
-  .list-item-icons {
-    display: flex;
-    align-items: center;
+    
+    .list-item-icons {
+      display: flex;
+      align-items: center;
+    }
   }
 
   .one-visit {

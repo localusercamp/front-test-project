@@ -175,6 +175,8 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  @import '@/styles/colors';
+
   .back-icon {
     position: absolute;
     cursor: pointer;
@@ -185,31 +187,31 @@ export default {
     width: 100%;
   }
 
-  .training-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 15px;
-    font-size: 14px;
-    color: #91A0A9;
-  }
-
   .content {
     padding: 80px 0 15px;
     height: fill-available;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-  }
 
-  .content-title {
-    padding: 10px 0;
-    color: white;
-    background: #DFE4E8;
-    text-align: center;
-  }
+    .content-title {
+      padding: 10px 0;
+      color: white;
+      background: #DFE4E8;
+      text-align: center;
+    }
 
-  .btn-list {
-    padding: 0 15px;
+    .training-info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 15px;
+      font-size: 14px;
+      color: $light-item-list;
+    }
+
+    .btn-list {
+      padding: 0 15px;
+    }
   }
 </style>

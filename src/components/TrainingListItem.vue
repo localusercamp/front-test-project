@@ -38,21 +38,23 @@ export default {
 </script>
 
 <style scoped lang="scss">
+  @import '@/styles/colors';
+
   #training-time {
     align-self: center;
-    color: #91A0A9;
-  }
-
-  #group-address {
-    font-size: 12px;
-  }
-
-  #check-mark {
-    margin-left: 10px;
+    color: $light-item-list;
   }
 
   .group-info {
     display: flex;
     flex-direction: column;
+
+    #group-address {
+      font-size: 12px;
+    }
+
+    #check-mark {
+      margin-left: 10px;
+    }
   }
 </style>

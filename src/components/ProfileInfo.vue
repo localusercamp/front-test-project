@@ -112,63 +112,63 @@ export default {
 
     .profile {
         margin: 0 20px;
+        
+        .profile-header {
+            @extend %container;
+            align-items: center;
+
+            .profile-fio{
+                @extend %container;
+                @extend %cera-pro-bold;
+                align-items: center;
+                margin-bottom: 10px;
+            }
+        }
+
+        .profile-content {
+            @extend %container;
+            margin: 30px 0;
+
+            .gradient-boxes {
+                display: flex;
+                margin-bottom: 20px;
+            }
+        }
+
+        .profile-contacts {
+            @extend %container;
+            font-size: 14px;
+
+            .box-header {
+                margin-bottom: 10px;
+                color: $box-title;
+            }
+
+            .client-box {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 20px;
+
+                .client-fio {
+                    @extend %container;
+                    @extend %cera-pro-bold;
+                }
+
+                .outlined {
+                    font-size: 12px;
+                    padding: 13px;
+                }
+            }
+
+            .phone-btn {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+            }
+        }
     }
 
-    .profile-fio{
-        @extend %container;
-        @extend %cera-pro-bold;
-        align-items: center;
-        margin-bottom: 10px;
-    }
-
-    .profile-header {
-        @extend %container;
-        align-items: center;
-    }
-    
-    .profile-content {
-        @extend %container;
-        margin: 30px 0;
-    }
-
-    .profile-contacts {
-        @extend %container;
-        font-size: 14px;
-    }
-
-    .gradient-boxes {
-        display: flex;
-        margin-bottom: 20px;
-    }
-
-    .client-box {
-        display: flex;
-        justify-content: space-between;
-        margin-bottom: 20px;
-    }
-
-    .client-fio {
-        @extend %container;
-        @extend %cera-pro-bold;
-    }
-
-    .box-header {
-        margin-bottom: 10px;
-        color: $box-title;
-    }
-
-    .outlined {
-        font-size: 12px;
-        padding: 13px;
-    }
-
-    .phone-btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 100%;
-    }
-    
     .left {
         margin-right: 10px;
     }

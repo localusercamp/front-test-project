@@ -46,17 +46,17 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  .list-item {
-    align-items: center;
-    justify-content: space-between;
-  }
-
   .type-form {
     margin-top: 25px;
-  }
 
-  .btn-save {
-    width: fill-available;
-    margin: 25px 15px 0;
+    .list-item {
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .btn-save {
+      width: fill-available;
+      margin: 25px 15px 0;
+    }
   }
 </style>

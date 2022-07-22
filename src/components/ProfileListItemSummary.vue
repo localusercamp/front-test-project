@@ -1,5 +1,5 @@
 <template>
-  <MyDialog v-model:show="profileDialogVisible">
+  <MyDialog v-model:show="profileDialogVisible" ref='dialog'>
     <ProfileInfo :profile="profile" :subscription="subscription"/>
   </MyDialog>
   <div class="list-item clickable" @click="showProfileInfo">
@@ -53,7 +53,7 @@ export default {
       this.profileDialogVisible = true;
     },
     closeProfileInfo() {
-      this.profileDialogVisible = false;
+      this.$refs.dialog.hideBody();
     },
     async saveData() {
       try {
@@ -86,6 +86,7 @@ export default {
     margin-right: 18px;
     color: #B4C9D6;
   }
+  
   .equipment-title {
     font-size: 14px;
     color: $blue-base;

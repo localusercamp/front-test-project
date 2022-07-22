@@ -52,47 +52,47 @@ export default {
     
     .abonement-widget {
         min-height: 110px;
-    }
 
-    .card {
-        display: flex;
-        justify-content: space-between;
-        background: #E1E7EB;
-        height: 100%;
-        border-radius: 15px;
-    }
+        .card {
+            display: flex;
+            justify-content: space-between;
+            background: #E1E7EB;
+            height: 100%;
+            border-radius: 15px;
 
-    .card-content {
-        display: flex;
-        flex-direction: column;
-        padding: 15px 20px;
-        font-size: 14px;
-    }
+            .card-content {
+                display: flex;
+                flex-direction: column;
+                padding: 15px 20px;
+                font-size: 14px;
 
-    .card-content-title {
-        margin-bottom: 10px;
-        color: $box-title;
-    }
+                .card-content-title {
+                    margin-bottom: 10px;
+                    color: $box-title;
+                }
 
-    .card-content-body {
-        display: flex;
-        flex-direction: column;
-        font-weight: bold;
-    }
+                .card-content-body {
+                    display: flex;
+                    flex-direction: column;
+                    font-weight: bold;
+                }
+            }
 
-    .edge {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        background: #CCD6DC;
-        width: 40px;
-        border-radius: 0 15px 15px 0;
-    }
+            .edge {
+                display: flex;
+                justify-content: flex-end;
+                align-items: center;
+                background: #CCD6DC;
+                width: 40px;
+                border-radius: 0 15px 15px 0;
 
-    .circle {
-        width: 16px;
-        height: 32px;
-        border-radius: 100% 0 0 100% / 50% 0 0 50%;
-        background: #FFFFFF;
+                .circle {
+                    width: 16px;
+                    height: 32px;
+                    border-radius: 100% 0 0 100% / 50% 0 0 50%;
+                    background: white;
+                }
+            }
+        }
     }
 </style>

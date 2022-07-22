@@ -22,40 +22,40 @@ export default {
         border: 1px solid white;
         border-radius: 15px;
         font-family: 'Cera Pro';
-    }
 
-    .my-button:hover {
-        background-color: $blue-hover;
-    }
-    
-    .my-button:active {
-        border-color: $blue-active;
+        &:hover {
+            background-color: $blue-hover;
+        }
+
+        &:active {
+            border-color: $blue-active;
+        }
     }
 
     .secondary {
         background-color: white;
         color: $blue-base;
-    }
+        
+        &:hover {
+            background-color: $secondary-hover;
+        }
 
-    .secondary:hover {
-        background-color: $secondary-hover;
-    }
-
-    .secondary:active {
-        border-color: $secondary-active;
+        &:active {
+            border-color: $secondary-active;
+        }
     }
 
     .outlined {
         background-color: white;
         color: $blue-base;
         border-color: $blue-base;
-    }
+        
+        &:hover {
+            background-color: $secondary-hover;
+        }
 
-    .outlined:hover {
-        background-color: $secondary-hover;
-    }
-
-    .outlined:active {
-        border-color: $secondary-active;
+        &:active {
+            border-color: $secondary-active;
+        }
     }
 </style>

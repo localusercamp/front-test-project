@@ -34,13 +34,13 @@ export default {
         background: linear-gradient(#20A3DD, #008BD1);
         border-radius: 18px;
         color: white;
-    }
 
-    .value {
-        font-size: 44px;
-    }
+        .value {
+            font-size: 44px;
+        }
 
-    .title {
-        font-size: 12px;
+        .title {
+            font-size: 12px;
+        }
     }
 </style>
