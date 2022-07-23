@@ -2,8 +2,8 @@
     <div class="my-calendar">
         <div class="my-calendar-header">
             <h4>{{ monthName }} {{ current_year }}</h4>
-            <div>
-                <MyButton class="light round" @click="previousMonth">
+            <div class="switch-month">
+                <MyButton class="light round left-item" @click="previousMonth">
                     <svg width="7" height="10" fill="#122A36">
                         <path d="M6.0092 1.5364C6.36067 1.18492 6.36067 0.615076 6.0092 0.263604C5.65773 -0.087868 5.08788 -0.087868 4.7364 0.263604L3.8147e-06 5L4.7364 9.73641C5.08788 10.0879 5.65773 10.0879 6.0092 9.73641L6.08974 9.64424C6.35823 9.29148 6.33138 8.7858 6.0092 8.46362L2.54579 5L6.0092 1.5364Z"/>
                     </svg>
@@ -16,8 +16,8 @@
             </div>
         </div>
         <div class="my-calendar-content">
-            <div v-for="(day, index) in days" :key="index">
-                <MyButton class="light round" :class="dayClasses(day)" :value="day.getDate()" @click="selectDate(day)"/>
+            <div v-for="(day, index) in days" :key="index" class="my-calendar-content-item">
+                <MyButton class="light round" :class="dayClasses(day)" :value="day.getDate()" @click="selectDate(day)" :badge="checkDay(day)"/>
             </div>
         </div>
     </div>
@@ -37,6 +37,12 @@ export default {
             default() {
                 return new Date();
             }
+        },
+        checked_dates: {
+            type: Array,
+            default() {
+                return [];
+            }
         }
     },
     data() {
@@ -45,6 +51,7 @@ export default {
             current_date: this.date,
             current_month: this.date.getMonth(),
             current_year: this.date.getFullYear(),
+            i: 0,
             days: [],
             months: [
                 "Январь",
@@ -97,8 +104,12 @@ export default {
                 'disabled': day.getMonth() != this.current_month,
             };
         },
+        checkDay(day) {
+            return this.checked_dates.includes(day.toLocaleDateString())
+        },
         selectDate(day) {
             this.current_date = new Date(this.current_year, this.current_month, day.getDate());
+            this.$emit('selectDate', this.current_date);
         },
         setDays() {
             let days = [];
@@ -137,16 +148,28 @@ export default {
             justify-content: space-between;
             margin-bottom: 23px;
 
+            .switch-month {
+                display: flex;
+            }
+
             .my-button {
                 height: 24px;
                 width: 24px;
                 padding: 0 7px;
+            }
+
+            .left-item {
+                margin-right: 8px;
             }
         }
 
         .my-calendar-content {
             display: grid;
             grid-template-columns: repeat(7, 1fr);
+
+            .my-calendar-content-item {
+                margin: 15px 0;
+            }
 
             .my-button {
                 height: 32px;

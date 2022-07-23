@@ -5,12 +5,21 @@ const routes = [
   {
     path: '/',
     name: 'schedule',
-    component: ScheduleView
-  },
-  {
-    path: '/calendar_schedule',
-    name: 'calendar_schedule',
-    component: () => import('@/views/CalendarScheduleView.vue')
+    component: ScheduleView,
+    children: [
+      {
+        path: '/',
+        name: 'list_schedule',
+        props: true,
+        component: () => import('@/views/ListScheduleView.vue')
+      },
+      {
+        path: '/calendar_schedule',
+        name: 'calendar_schedule',
+        props: true,
+        component: () => import('@/views/CalendarScheduleView.vue')
+      },
+    ]
   },
   {
     path: '/training_info/:id',
