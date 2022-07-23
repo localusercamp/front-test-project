@@ -30,7 +30,7 @@
         <span>Тип тренировки: {{ type_name }}</span>
       </div>
     </div>
-    <div class="btn-list" v-if="!training?.completed">
+    <div class="btn-list" v-if="training != null && !training?.completed">
       <MyButton @click="saveTraining">Закрыть тренировку</MyButton>
       <MyButton class="secondary" @click="$router.push('/training_info/' + this.id)">Редактировать</MyButton>
     </div>
@@ -176,11 +176,6 @@ export default {
 
 <style scoped lang="scss">
   @import '@/styles/colors';
-
-  .back-icon {
-    position: absolute;
-    cursor: pointer;
-  }
 
   .group-info {
     text-align: center;

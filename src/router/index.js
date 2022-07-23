@@ -8,6 +8,11 @@ const routes = [
     component: ScheduleView
   },
   {
+    path: '/calendar_schedule',
+    name: 'calendar_schedule',
+    component: () => import('@/views/CalendarScheduleView.vue')
+  },
+  {
     path: '/training_info/:id',
     name: 'training_info',
     props: true,
@@ -18,10 +23,6 @@ const routes = [
     name: 'training_summary',
     props: true,
     component: () => import('@/views/TrainingSummaryView.vue'),
-    // beforeEnter: (to, from) => {
-    //   // reject the navigation
-    //   return false
-    // },
   }
 ]
 

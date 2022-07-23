@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="header" :class="{ header_scroll: isScroll }">
-      <img id="calendar-icon" src="@/assets/icons/Calendar.svg">
+      <router-link to="/calendar_schedule">
+        <img id="calendar-icon" src="@/assets/icons/Calendar.svg">
+      </router-link>
       <h4 class="header-text">Расписание</h4>
     </div>
     <div class="content">

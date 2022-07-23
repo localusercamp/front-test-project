@@ -11,9 +11,7 @@
     </template>
   </MyDialog>
   <div class="header" :class="{ header_scroll: isScroll }">
-    <router-link to="/" id="back-icon">
-      <img src="@/assets/icons/Back.svg">
-    </router-link>
+    <img src="@/assets/icons/Back.svg" class="back-icon" @click='$router.back'>
     <div class="group-info">
       <h4 id="group-title">{{group?.title}}</h4>
       <div v-if="training?.date">
@@ -143,10 +141,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  #back-icon {
-    position: absolute;
-  }
-
   .group-info {
     text-align: center;
     width: 100%;

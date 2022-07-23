@@ -1,12 +1,13 @@
 <template>
     <button class="my-button">
-        <slot></slot>
+        <slot>{{ value }}</slot>
     </button>
 </template>
 
 <script>
 export default {
-  name: 'MyButton'
+  name: 'MyButton',
+  props: ['value']
 }
 </script>
 
@@ -57,5 +58,41 @@ export default {
         &:active {
             border-color: $secondary-active;
         }
+    }
+
+    .light {
+        background-color: #F3F5F4;
+        color: #122A36;
+
+        &:hover {
+            background-color: #CBCDCC;
+        }
+
+        &:active {
+            border-color: #677982;
+        }
+    }
+
+    .light-primary {
+        background-color: #DBEFFC;
+        color: #1B4361;
+
+        &:hover {
+            background-color: #BDD9EC;
+        }
+
+        &:active {
+            border-color: #93B0C3;
+        }
+    }
+
+    .disabled {
+        background-color: white;
+        color: #E2E2E2;
+        pointer-events: none;
+    }
+
+    .round {
+        border-radius: 100%;
     }
 </style>
