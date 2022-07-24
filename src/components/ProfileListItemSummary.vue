@@ -90,7 +90,7 @@ export default {
   
   .equipment-title {
     font-size: 14px;
-    color: $blue-base;
+    color: $primary-base;
     margin-top: 4px;
   }
 </style>

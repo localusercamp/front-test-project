@@ -5,7 +5,6 @@
     </div>
     <div class="content">
         <MyCalendar
-            v-if="sсhedule_all[0]"
             class="calendar"
             :date="current_date"
             :checked_dates="unique_dates"
@@ -15,7 +14,8 @@
             <h4 v-if="selected_date !== currentDate.toLocaleDateString()" class="day-header">{{ getDayAndMonth(selected_date) }}</h4>
             <h4 v-else-if="selected_date !== tomorrow.toLocaleDateString()" class="day-header">Сегодня</h4>
             <h4 v-else class="day-header">Завтра</h4>
-            <TrainingList :trainings="sсhedule_all[index]?.trainings" :groups="groups" />
+            <TrainingList v-if="index > -1" :trainings="scheduleAll[index].trainings" :groups="groups" />
+            <h4 v-else>Нет тренировок</h4>
         </div>
     </div>
 </template>
@@ -24,10 +24,11 @@
 import MyCalendar from '@/components/UI/MyCalendar.vue'
 import TrainingList from '@/components/TrainingList.vue'
 import dateMixin from '@/mixins/dateMixin'
+import scheduleMixin from '@/mixins/scheduleMixin';
 
 export default {
     name: 'CalendarScheduleView',
-    mixins: [dateMixin],
+    mixins: [dateMixin, scheduleMixin],
     components: {
         MyCalendar,
         TrainingList
@@ -35,27 +36,23 @@ export default {
     data() {
         return {
             selected_date: new Date(),
-            index: null
+            index: -1
         }
     },
     computed: {
-        sсhedule_all() {
-            return this.$attrs.schedule_all;
-        },
-        groups() {
-            return this.$attrs.groups;
-        },
-        unique_dates() {
-            return this.$attrs.unique_dates;
-        },
+        scheduleAll() {
+            return this.schedule_all;
+        }
     },
     methods: {
         selectDate(data) {
             this.selected_date = data;
-            this.index = this.indexSchedule();
+            this.indexSchedule();
         },
         indexSchedule() {
-            return this.sсhedule_all.findIndex(schedule => this.convertStringToDate(schedule.date).toLocaleDateString() == this.selected_date.toLocaleDateString());
+            if(this.scheduleAll?.length > 0) {
+                this.index = this.scheduleAll?.findIndex(schedule => schedule.date == this.selected_date.toLocaleDateString());                
+            }
         }
     }
 }

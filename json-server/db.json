@@ -15,7 +15,7 @@
       "finish_time": "18:00",
       "date": "01.08.2022",
       "groupId": 2,
-      "completed": true,
+      "completed": false,
       "typeId": 1
     },
     {
@@ -294,6 +294,12 @@
       "equipmentId": 2
     },
     {
+      "id": 2,
+      "trainingId": 1,
+      "profileId": 2,
+      "equipmentId": null
+    },
+    {
       "id": 3,
       "trainingId": 1,
       "profileId": 3,
@@ -318,28 +324,10 @@
       "equipmentId": null
     },
     {
-      "trainingId": 2,
-      "profileId": 10,
-      "equipmentId": 1,
-      "id": 7
-    },
-    {
-      "trainingId": 2,
-      "profileId": 13,
-      "equipmentId": 2,
-      "id": 8
-    },
-    {
       "trainingId": 3,
-      "profileId": 6,
-      "equipmentId": 2,
-      "id": 9
-    },
-    {
-      "trainingId": 1,
-      "profileId": 6,
-      "equipmentId": 2,
-      "id": 10
+      "profileId": 8,
+      "equipmentId": null,
+      "id": 7
     }
   ],
   "subscriptions": [
@@ -402,7 +390,7 @@
     {
       "id": 8,
       "max_visits": 8,
-      "visited": 3,
+      "visited": 4,
       "expires_at": "07.08.2022",
       "created_at": "07.07.2022",
       "profileId": 8

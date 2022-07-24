@@ -26,44 +26,44 @@ export default {
         padding: 15px 22px;
         color: white;
         font-size: 16px;
-        background-color: $blue-base;
+        background-color: $primary-base;
         border: 1px solid white;
         border-radius: 15px;
         font-family: 'Cera Pro';
 
         &:hover {
-            background-color: $blue-hover;
+            background-color: $primary-hover;
         }
 
         &:active {
-            border-color: $blue-active;
+            border-color: $primary-active;
         }
     }
 
     .secondary {
         background-color: white;
-        color: $blue-base;
+        color: $primary-base;
         
         &:hover {
             background-color: $secondary-hover;
         }
 
         &:active {
-            border-color: $secondary-active;
+            border-color: $primary-active;
         }
     }
 
     .outlined {
         background-color: white;
-        color: $blue-base;
-        border-color: $blue-base;
+        color: $primary-base;
+        border-color: $primary-base;
         
         &:hover {
             background-color: $secondary-hover;
         }
 
         &:active {
-            border-color: $secondary-active;
+            border-color: $primary-active;
         }
     }
 

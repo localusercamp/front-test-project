@@ -45,7 +45,7 @@ h4 {
 }
 
 .day-header {
-    color: $blue-base;
+    color: $primary-base;
     padding: 10px;
 }
 
@@ -57,7 +57,7 @@ h4 {
 .list-item {
     display: flex;
     padding: 12px 20px;
-    border: 1px solid $lightgray-border;
+    border: 1px solid $light-border;
 
     .list-item-left {
         margin-right: 20px;

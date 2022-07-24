@@ -6,55 +6,55 @@
       </router-link>
       <h4 class="header-text">Расписание</h4>
     </div>
-    <div class="content">
+    <div class="content" v-if="sсhedule_visible.length > 0">
       <div v-for="(item, index) in sсhedule_visible" :key="index" class="trainings">
         <h4 v-if="item.date !== currentDate.toLocaleDateString()" class="day-header">{{getDayAndMonth(convertStringToDate(item.date))}}</h4>
         <h4 v-else-if="item.date !== tomorrow.toLocaleDateString()" class="day-header">Сегодня</h4>
         <h4 v-else class="day-header">Завтра</h4>
         <TrainingList :trainings="item.trainings" :groups="groups" />
       </div>
-      <div class="observer" ref="observer"></div>
+      <MyObserver @intersect="loadMoreTrainings" />
+    </div>
+    <div v-else class="content">
+      <h4>Нет тренировок</h4>
     </div>
   </div>
 </template>
 
 <script>
 import TrainingList from '@/components/TrainingList.vue';
-import observerMixin from '@/mixins/observerMixin';
+import MyObserver from '@/components/MyObserver.vue'
 import dateMixin from '@/mixins/dateMixin';
+import scheduleMixin from '@/mixins/scheduleMixin';
 
 export default {
   name: 'ListScheduleView',
-  mixins: [dateMixin, observerMixin],
+  mixins: [dateMixin, scheduleMixin],
   components: {
-    TrainingList
-  },
-  props: {
-    schedule_all: {
-      type: Array,
-      required: true
-    },
-    groups: {
-      type: Array,
-      required: true
-    }
+    TrainingList,
+    MyObserver
   },
   data() {
     return {
       sсhedule_visible: [],
-      schedule_item_index: 0,
     }
   },
   methods: {
     loadMoreTrainings() {
-      if(this.schedule_item_index < this.schedule_all.length - 1) {
-        this.sсhedule_visible = this.sсhedule_visible.concat(this.schedule_all.slice(this.schedule_item_index, this.schedule_item_index + 4));
+      if(this.schedule_item_index < this.schedule_all?.length - 1) {
+        this.sсhedule_visible = this.sсhedule_visible.concat(this.schedule_all?.slice(this.schedule_item_index, this.schedule_item_index + 4));
         this.schedule_item_index += 4;
       }
     },
-  },
-  created() {
-    this.loadMoreTrainings();
+    async fetchTrainings() {
+      try {
+          const response = await this.$axios.get('trainings');
+          this.separateTrainings(response.data);
+          this.loadMoreTrainings();
+      } catch (error) {
+          alert("Ошибка! " + error);
+      }
+    },
   }
 }
 </script>

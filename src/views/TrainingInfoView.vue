@@ -155,6 +155,7 @@ export default {
     
     .btn-list {
       padding: 0 15px;
+      margin-top: 20px;
     }
   }
 </style>

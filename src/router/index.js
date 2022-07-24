@@ -1,25 +1,18 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import ScheduleView from '@/views/ScheduleView.vue'
+import ListScheduleView from '@/views/ListScheduleView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'schedule',
-    component: ScheduleView,
-    children: [
-      {
-        path: '/',
-        name: 'list_schedule',
-        props: true,
-        component: () => import('@/views/ListScheduleView.vue')
-      },
-      {
-        path: '/calendar_schedule',
-        name: 'calendar_schedule',
-        props: true,
-        component: () => import('@/views/CalendarScheduleView.vue')
-      },
-    ]
+    name: 'list_schedule',
+    props: true,
+    component: ListScheduleView
+  },
+  {
+    path: '/calendar_schedule',
+    name: 'calendar_schedule',
+    props: true,
+    component: () => import('@/views/CalendarScheduleView.vue')
   },
   {
     path: '/training_info/:id',

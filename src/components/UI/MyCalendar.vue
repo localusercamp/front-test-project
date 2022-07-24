@@ -17,7 +17,13 @@
         </div>
         <div class="my-calendar-content">
             <div v-for="(day, index) in days" :key="index" class="my-calendar-content-item">
-                <MyButton class="light round" :class="dayClasses(day)" :value="day.getDate()" @click="selectDate(day)" :badge="checkDay(day)"/>
+                <MyButton
+                    class="light round"
+                    :class="dayClasses(day)"
+                    :value="day.getDate()"
+                    :badge="checkDay(day)"
+                    @click="selectDate(day)"
+                />
             </div>
         </div>
     </div>
@@ -51,7 +57,6 @@ export default {
             current_date: this.date,
             current_month: this.date.getMonth(),
             current_year: this.date.getFullYear(),
-            i: 0,
             days: [],
             months: [
                 "Январь",
